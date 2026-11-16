@@ -178,28 +178,36 @@ impl LassoLive {
         Some(t.j.samples.iter().zip(&t.w).map(|(q, &w)| (q.0, q.1, w != 0)).collect())
     }
 
-    /// The strokes with a halo now, ascending: whole (None), or exact area's inside runs (inside_runs).
-    pub fn halo_list(&self) -> Vec<(usize, Option<Vec<(f32, f32, bool)>>)> {
+    /// The strokes with a halo now, ascending: a stroke whole, or in exact area the one whose halo
+    /// covers inside runs. Cheap (no sample list is copied): the caller draws only those its refresh
+    /// rect meets, and asks inside_runs for the runs of just those.
+    pub fn halo_indices(&self) -> Vec<usize> {
         let mut out = Vec::new();
         for i in 0..self.shown.len() {
             if !self.exact || self.whole_only[i] {
                 if self.shown[i] {
-                    out.push((i, None));
+                    out.push(i);
                 }
                 continue;
             }
             let Some(t) = self.tracks[i].as_ref() else { continue };
             if !t.j.long {
                 if self.shown[i] {
-                    out.push((i, None));
+                    out.push(i);
                 }
             } else if t.inside == t.j.total && t.inside > 0 {
-                out.push((i, None));
+                out.push(i);
             } else if t.inside > 0 {
-                out.push((i, self.inside_runs(i)));
+                // (inside < total here: the stroke is shown in part, its inside runs haloed)
+                out.push(i);
             }
         }
         out
+    }
+
+    /// The strokes with a halo now, ascending: whole (None), or exact area's inside runs (inside_runs).
+    pub fn halo_list(&self) -> Vec<(usize, Option<Vec<(f32, f32, bool)>>)> {
+        self.halo_indices().into_iter().map(|i| (i, self.inside_runs(i))).collect()
     }
 
     /// Whether p is still the page it was made on (no stroke added, taken off or replaced since).

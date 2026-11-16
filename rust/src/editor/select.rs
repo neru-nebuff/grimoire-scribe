@@ -122,6 +122,11 @@ pub(super) struct SelMode {
     point_at: u32,
     /// screen px the preview's fast refreshes covered: the lift draws all of it again in grays
     pub(super) preview_rect: Rect,
+    /// the halo rects a batch's flips made that no fast refresh has written yet (the panel still taking
+    /// the last one), and the halo band area they cover: written together at the next free moment
+    /// (preview_show), so no DU ever queues behind another (display_fast_busy, the drag's rule)
+    preview_pending: Vec<Rect>,
+    preview_pending_area: i64,
     /// the scripts' probes: the last lasso's batches and preview refreshes, whether its lift reused the
     /// preview's answer, and the rect the lift drew again
     preview_batches: u32,
@@ -1168,7 +1173,10 @@ fn preview_fold(a: &mut App, t: u32, show: bool) {
     };
     s.sel.pts = pts;
     let Some((rects, area)) = out else {
-        // (the page changed under the lasso: no preview; its halos go)
+        // (the page changed under the lasso: no preview; its halos go, and the ones still waiting are
+        // never written: the page under them lost them with it)
+        s.sel.preview_pending.clear();
+        s.sel.preview_pending_area = 0;
         let r = std::mem::take(&mut s.sel.preview_rect);
         if show {
             redraw(a, r, RefreshMode::Fast);
@@ -1179,11 +1187,43 @@ fn preview_fold(a: &mut App, t: u32, show: bool) {
     s.sel.folded = s.sel.pts.len();
     s.sel.preview_batches = live.batches;
     s.sel.live = Some(live);
-    if !show || rects.is_empty() {
+    if !show {
+        // (the lift draws the selection itself, in grays: halos waiting for the panel are not written)
+        s.sel.preview_pending.clear();
+        s.sel.preview_pending_area = 0;
         return;
     }
+    if !rects.is_empty() {
+        let clip = lasso_clip(a);
+        let s = ed(a);
+        for r in rects {
+            let r = rect_intersect(r, clip);
+            if !rect_is_empty(r) {
+                s.sel.preview_pending.push(r);
+            }
+        }
+        s.sel.preview_pending_area = s.sel.preview_pending_area.saturating_add(area);
+        if s.sel.preview_pending.len() > PREVIEW_RECTS * 4 {
+            // (a show kept waiting: a batch's rects lie along the lasso's stretch, so they join)
+            s.sel.preview_pending = merge_rects(std::mem::take(&mut s.sel.preview_pending), PREVIEW_RECTS, ui_px(32.0));
+        }
+    }
+    preview_show(a);
+}
+
+/// The preview's halo rects waiting to be written, each composed and sent as one fast refresh, once the
+/// panel has finished the last one it was sent (display_fast_busy: a DU queued behind another makes the
+/// driver hold up the pen's input, which is read by the same loop that submits it). A batch that finds the
+/// panel busy waits for the next tick (preview_tick), joined with the next batch's rects, so a lasso drawn
+/// fast still has its halo at the pause and no fold ever piles refreshes onto the panel.
+fn preview_show(a: &mut App) {
+    if sel_ref(a).preview_pending.is_empty() || display_fast_busy() {
+        return;
+    }
+    let pending = std::mem::take(&mut ed(a).sel.preview_pending);
+    let area = std::mem::take(&mut ed(a).sel.preview_pending_area);
     let clip = lasso_clip(a);
-    let rects = merge_rects(rects, PREVIEW_RECTS, ui_px(32.0));
+    let rects = merge_rects(pending, PREVIEW_RECTS, ui_px(32.0));
     let mut all = RECT_EMPTY;
     for r in rects {
         let r = rect_intersect(r, clip);
@@ -1194,37 +1234,57 @@ fn preview_fold(a: &mut App, t: u32, show: bool) {
         all = rect_union(all, r);
         ed(a).sel.preview_refreshes += 1;
     }
+    if rect_is_empty(all) {
+        return;
+    }
     let s = ed(a);
     s.sel.preview_rect = rect_union(s.sel.preview_rect, all);
     du_wear_add(&mut a.du_wear, all, area, now_ms());
 }
 
-/// Rects merged greedily: any two within `near` px of each other join, then the closest pairs until at
-/// most `max` are left.
+/// Rects merged into at most `max`: the ones within `near` px of each other join. A batch's rects lie along
+/// the lasso's newest stretch and its closing chord, so one pass over them sorted top to bottom joins their
+/// neighbours, and only then the closest of those left until `max` remain. (A batch can hold a rect for
+/// every stroke the closing chord swept; searching every pair of them over and over cost the cube of that
+/// count, and the lasso froze as soon as its ink took the halo, issue #149.)
 fn merge_rects(mut v: Vec<Rect>, max: usize, near: i32) -> Vec<Rect> {
     v.retain(|r| !rect_is_empty(*r));
-    loop {
-        let mut best: Option<(i64, usize, usize)> = None;
-        for i in 0..v.len() {
-            for j in i + 1..v.len() {
-                let (a, b) = (v[i], v[j]);
-                let gx = (a.x.max(b.x) - (a.x + a.w).min(b.x + b.w)).max(0) as i64;
-                let gy = (a.y.max(b.y) - (a.y + a.h).min(b.y + b.h)).max(0) as i64;
-                let gap = gx.max(gy);
-                if best.is_none_or(|bb| gap < bb.0) {
-                    best = Some((gap, i, j));
-                }
-            }
-        }
-        match best {
-            Some((gap, i, j)) if gap <= near as i64 || v.len() > max => {
-                let u = rect_union(v[i], v[j]);
-                v.swap_remove(j);
-                v[i] = u;
-            }
-            _ => return v,
-        }
+    if v.len() <= 1 {
+        return v;
     }
+    let gap = |a: Rect, b: Rect| -> i64 {
+        let gx = (a.x.max(b.x) - (a.x + a.w).min(b.x + b.w)).max(0) as i64;
+        let gy = (a.y.max(b.y) - (a.y + a.h).min(b.y + b.h)).max(0) as i64;
+        gx.max(gy)
+    };
+    let max = max.max(1);
+    v.sort_by_key(|r| (r.y, r.x));
+    let mut out: Vec<Rect> = Vec::with_capacity(v.len());
+    for r in v {
+        if let Some(last) = out.last_mut() {
+            if gap(*last, r) <= near as i64 {
+                *last = rect_union(*last, r);
+                continue;
+            }
+        }
+        out.push(r);
+    }
+    // (more than max: the closest neighbours in that order join, whatever their gap)
+    while out.len() > max {
+        let mut best = 0;
+        let mut best_gap = i64::MAX;
+        for i in 0..out.len() - 1 {
+            let g = gap(out[i], out[i + 1]);
+            if g < best_gap {
+                best_gap = g;
+                best = i;
+            }
+        }
+        let u = rect_union(out[best], out[best + 1]);
+        out[best] = u;
+        out.remove(best + 1);
+    }
+    out
 }
 
 /// The preview ends with its lasso: its state goes; the screen rect its refreshes covered, which the
@@ -1234,19 +1294,24 @@ fn preview_end(s: &mut EditorState) -> Rect {
     s.sel.live = None;
     s.sel.folded = 0;
     s.sel.halved = false;
+    s.sel.preview_pending.clear();
+    s.sel.preview_pending_area = 0;
     std::mem::take(&mut s.sel.preview_rect)
 }
 
 /// editor_tick: a pen that paused with lasso points not folded in yet, or one still moving past
-/// PREVIEW_MS since the last fold, gets them folded now.
+/// PREVIEW_MS since the last fold, gets them folded now; the halos a busy panel left waiting are written
+/// as soon as it is free (preview_show).
 fn preview_tick(a: &mut App, now: u32) {
     let m = sel_ref(a);
-    if m.state != SelState::Lasso || m.live.is_none() || (m.folded >= m.pts.len() && !m.halved) {
+    if m.state != SelState::Lasso {
         return;
     }
-    if (now.wrapping_sub(m.point_at) as i32) >= PREVIEW_PAUSE_MS as i32 || (now.wrapping_sub(m.fold_at) as i32) >= PREVIEW_MS as i32 {
+    let waiting = m.live.is_some() && (m.folded < m.pts.len() || m.halved);
+    if waiting && ((now.wrapping_sub(m.point_at) as i32) >= PREVIEW_PAUSE_MS as i32 || (now.wrapping_sub(m.fold_at) as i32) >= PREVIEW_MS as i32) {
         preview_fold(a, now, true);
     }
+    preview_show(a);
 }
 
 /// The halo on the ink the lasso being drawn would select (the preview's) or a selection holds: a dithered
@@ -1267,8 +1332,14 @@ pub(super) fn sel_draw_halo(a: &mut App, r: Rect) {
     match s.sel.state {
         SelState::Lasso => match s.sel.live.as_deref() {
             Some(l) if l.holds(p) => {
-                for (i, runs) in l.halo_list() {
-                    items.push((&p.strokes[i], runs));
+                for i in l.halo_indices() {
+                    let st = &p.strokes[i];
+                    if rect_overlaps(halo_rect(s, st), clip) {
+                        // (exact area's runs are copied for the strokes this compose draws alone: a clone
+                        // of every inside run of every haloed stroke, once per compose, made drawing the
+                        // lasso in exact mode cost more the larger the selection grew)
+                        items.push((st, l.inside_runs(i)));
+                    }
                 }
             }
             _ => return,

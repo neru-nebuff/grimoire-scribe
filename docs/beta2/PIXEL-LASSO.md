@@ -326,9 +326,17 @@ documented in the user docs; the final selection's halo, drawn at the lift, is e
   meeting r: `canvas_dither_poly` along its spine in screen px, width the ink's screen width plus
   2 x 3 ui px, then the page canvas's ink pixels in that band are put back over it (a min of the
   two), so ink stays solid.
-- Each batch: the screen boxes (plus halo) of the strokes that flipped are merged greedily into at
-  most 6 rects (boxes within 32 px join; beyond 6, the closest pair joins). Each rect: `compose`, then
-  `app_invalidate(r, Fast)`. The lasso's own segments keep their DU refreshes as now.
+- Each batch: the screen boxes (plus halo) of the strokes that flipped are merged into at most 6 rects
+  (boxes within 32 px join, in one pass over them sorted top to bottom; beyond 6, the closest of those
+  left join). Each rect: `compose`, then `app_invalidate(r, Fast)`. The lasso's own segments keep their
+  DU refreshes as now.
+- A batch is written only once the panel has finished the fast refresh before it (`display_fast_busy`,
+  as a drag's and a resize's shows wait): on the Kindle the loop that submits a DU also reads the pen,
+  and a refresh queued behind another holds it up, which stalled the lasso as soon as its ink took the
+  halo (issue #149). A batch that finds the panel busy waits, joins the next one's rects, and
+  `preview_tick` writes it as soon as the panel is free: the halo follows the lasso at the panel's own
+  rate and is there at a pause in the stroke. The draws themselves were cut to what a compose shows:
+  in exact mode the inside runs are copied for the strokes the rect meets, not for every haloed stroke.
 - DU shows black and white only, so gray ink inside a preview rect is posterized until the lift,
   exactly as along the lasso line today. The lift's existing GL16 redraw of `lasso_rect` is widened
   to the union of every preview rect, so grays come back in that one refresh.
