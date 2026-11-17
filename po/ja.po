@@ -71,9 +71,8 @@ msgstr "選択肢の前 / 次"
 #. with the buttons' names) the buttons or gestures that take the pen in use to the next smaller and the next
 #. larger of its quick sizes, in that order.
 #: rust/src/actions.rs
-#, fuzzy
 msgid "Smaller / larger size"
-msgstr "より小さい"
+msgstr "サイズを小さく / 大きく"
 
 #: rust/src/actions.rs
 msgid "Previous / next page"
@@ -561,22 +560,20 @@ msgstr "グラフを下に移動"
 #. TRANSLATORS: (Gestures and shortcuts lists, about 1100 px at 44 px in bold) the pen in use goes to the next
 #. smaller of its five quick sizes (the widths of the card a pen held on the toolbar opens).
 #: rust/src/actions.rs
-#, fuzzy
 msgid "Smaller size"
-msgstr "より小さい"
+msgstr "サイズを小さく"
 
 #. TRANSLATORS: (Gestures and shortcuts lists, about 1100 px at 44 px in bold) the pen in use goes to the next
 #. larger of its five quick sizes.
 #: rust/src/actions.rs
-#, fuzzy
 msgid "Larger size"
-msgstr "より大きな"
+msgstr "サイズを大きく"
 
 #. TRANSLATORS: (Gestures and shortcuts lists, about 1100 px at 44 px in bold) opens the card of the pen in
 #. use's quick sizes beside its button on the toolbar, as holding that button does.
 #: rust/src/actions.rs
 msgid "Sizes of the pen in use"
-msgstr ""
+msgstr "使用中のペンの太さ"
 
 #. TRANSLATORS: (shortcuts and gestures lists, about 1100 px at 44 px in bold) in the Library: opens Files, the
 #. Kindle's storage to browse, whether or not its card is in the Library.
@@ -589,7 +586,7 @@ msgstr "ファイル"
 #. out of any folder (and out of Files).
 #: rust/src/actions.rs
 msgid "Home"
-msgstr ""
+msgstr "ホーム"
 
 #. TRANSLATORS: the name of a notebook that has none (it is saved with it, as a name given).
 #: rust/src/annotate.rs rust/src/pdfimport.rs rust/src/store.rs rust/src/ui.rs
@@ -842,16 +839,15 @@ msgstr "写真"
 
 #. TRANSLATORS: Files' row for grimoire/fonts, the fonts copied for Classic's text (44 px in a row of 150 px).
 #: rust/src/app.rs rust/src/browser.rs
-#, fuzzy
 msgid "Fonts"
 msgstr "フォント"
 
 #. TRANSLATORS: a toast (about 1700 px at 44 px in bold): a picture was copied into one of Grimoire's folders;
 #. %s is that folder's name as Files shows it (Templates, Photos).
 #: rust/src/app.rs
-#, fuzzy, c-format
+#, c-format
 msgid "Copied to %s."
-msgstr "%sとリンクしています。"
+msgstr "%sにコピーしました。"
 
 #. TRANSLATORS: a PDF saved in the background, and where (the Kindle's folder of them).
 #: rust/src/app.rs
@@ -1041,9 +1037,8 @@ msgstr "パスが長すぎます。"
 #. Grimoire's templates or photos (Use as template, Use as photo, a sheet's From a file...); the storage keeps
 #. 100 MB free, so the likely cause is that it is nearly full.
 #: rust/src/bgwork_copy.rs
-#, fuzzy
 msgid "Couldn't copy file. Is the storage full?"
-msgstr "このページを保存できませんでした。ストレージがいっぱいですか?"
+msgstr "ファイルをコピーできませんでした。ストレージがいっぱいですか?"
 
 #: rust/src/bgwork_template.rs
 msgid "Templates for Grimoire"
@@ -1169,80 +1164,73 @@ msgstr "ファイルから..."
 #: rust/src/browser.rs
 #, c-format
 msgid "Name can't contain %s"
-msgstr ""
+msgstr "名前に %s は使用できません"
 
 #. TRANSLATORS: a toast over the rename keyboard in Files: the name typed begins or ends with a space. One line
 #. of about 1500 px at 44 px.
 #: rust/src/browser.rs
 msgid "Name can't start or end with a space."
-msgstr ""
+msgstr "名前の先頭または末尾に空白は使用できません。"
 
 #. TRANSLATORS: a toast over the rename keyboard in Files: the name typed begins with a dot (which hides a file)
 #. or ends with one. One line of about 1500 px at 44 px.
 #: rust/src/browser.rs
 msgid "Name can't start or end with a dot."
-msgstr ""
+msgstr "名前の先頭または末尾にドットは使用できません。"
 
 #. TRANSLATORS: a toast over the rename keyboard in Files: a file's new name must end as its old one did
 #. (%s: its extension with the dot, such as .png). One line of about 1500 px at 44 px.
 #: rust/src/browser.rs
 #, c-format
 msgid "Keep the extension %s."
-msgstr ""
+msgstr "拡張子 %s を残してください。"
 
 #. TRANSLATORS: a toast in Files: the name is longer than a name can be there (255 bytes), or, as Rename is
 #. tapped, longer than Grimoire's keyboard can hold to edit (95 bytes). One line of about 1000 px at 44 px.
 #: rust/src/browser.rs
-#, fuzzy
 msgid "Name too long."
-msgstr "パスが長すぎます。"
+msgstr "名前が長すぎます。"
 
 #. TRANSLATORS: a toast in Files: renaming the file or folder failed (grimoire.log says why). One line.
 #: rust/src/browser.rs
-#, fuzzy
 msgid "Couldn't rename."
-msgstr "やり直せませんでした。"
+msgstr "名前を変更できませんでした。"
 
 #. TRANSLATORS: a toast over the rename keyboard in Files: another file or folder in this folder has the name
 #. typed (nothing is ever replaced), or Grimoire keeps that name for itself there. One line of about 1500 px
 #. at 44 px.
 #: rust/src/browser.rs
 msgid "That name is taken."
-msgstr ""
+msgstr "その名前は使用されています。"
 
 #. TRANSLATORS: a toast in Files: an import is working on this file or folder (or the folder it is in), so it
 #. is not renamed, moved to the trash or put back now. One line of about 1000 px at 44 px.
 #: rust/src/browser.rs
-#, fuzzy
 msgid "Importing now."
-msgstr "インポート"
+msgstr "インポート中です。"
 
 #. TRANSLATORS: a toast in Files' Trash: the item could not go back, as every name it could take there (its
 #. own, then with " 2" up to " 99"), or its notebook's id, is taken. One line of about 1500 px at 44 px.
 #: rust/src/browser.rs
-#, fuzzy
 msgid "Couldn't restore. Name taken."
-msgstr "ページ名を保存できませんでした。"
+msgstr "復元できませんでした。名前が使用されています。"
 
 #. TRANSLATORS: a toast in Files' Trash: the folder the item came from is not there any more. One line of
 #. about 1500 px at 44 px.
 #: rust/src/browser.rs
-#, fuzzy
 msgid "Couldn't restore. Folder gone."
-msgstr "フォルダーを開けませんでした。"
+msgstr "復元できませんでした。フォルダーがありません。"
 
 #. TRANSLATORS: a toast in Files: moving the file or folder to the trash failed (grimoire.log says why). One line.
 #: rust/src/browser.rs
-#, fuzzy
 msgid "Couldn't move to trash."
-msgstr "ページを移動できませんでした。"
+msgstr "ゴミ箱に移動できませんでした。"
 
 #. TRANSLATORS: a toast in Files' Trash: the entry could not be put back (its record does not read, or the
 #. place it names is not one Grimoire writes in). One line.
 #: rust/src/browser.rs
-#, fuzzy
 msgid "Couldn't restore."
-msgstr "やり直せませんでした。"
+msgstr "復元できませんでした。"
 
 #. TRANSLATORS: a file's size in kilobytes, in the file picker's rows and cards (small text).
 #: rust/src/browser.rs
@@ -1299,12 +1287,12 @@ msgstr "すべてのストレージ"
 #. only looks in (44 px in a row of 150 px).
 #: rust/src/browser.rs
 msgid "Kindle fonts"
-msgstr ""
+msgstr "Kindleのフォント"
 
 #. TRANSLATORS: Files' row for grimoire/trash, where deleted notebooks and pages go (44 px in a row of 150 px).
 #: rust/src/browser.rs
 msgid "Trash"
-msgstr ""
+msgstr "ゴミ箱"
 
 #. TRANSLATORS: the Import place's last row: it looks in grimoire/import for new files now (44 px in a row).
 #: rust/src/browser.rs
@@ -1314,15 +1302,14 @@ msgstr "もう一度探す"
 #. TRANSLATORS: the last row of the file picker's first screen (and of Files'): puts a Files card at the end
 #. of the Library, which opens these places to browse (44 px in a row of about 1500 px).
 #: rust/src/browser.rs
-#, fuzzy
 msgid "Show Files in Library"
-msgstr "リンクエリアを表示"
+msgstr "ライブラリにファイルを表示"
 
 #. TRANSLATORS: Files with Show all: the second line of a row that is a link, which Grimoire never follows
 #. (34 px, under the link's name).
 #: rust/src/browser.rs
 msgid "link, not followed"
-msgstr ""
+msgstr "リンク（開きません）"
 
 #. TRANSLATORS: a folder in the file picker that holds pictures; %d is how many (small text under its name).
 #: rust/src/browser.rs
@@ -1352,9 +1339,8 @@ msgstr "キャンセル"
 #. TRANSLATORS: the title of Files' Go to sheet, which a tap on the folder shown in its path bar opens: its
 #. places and the Kindle's top folders, one a row (34 px, at the sheet's top).
 #: rust/src/browser.rs
-#, fuzzy
 msgid "Go to"
-msgstr "ページに移動"
+msgstr "移動先"
 
 #. TRANSLATORS: in Files too, the answers to the question before a file or folder of Grimoire's own folders
 #. is deleted: into the trash folder on the Kindle's storage (%s), from where Files' Trash can put it back,
@@ -1379,17 +1365,15 @@ msgstr "「%s」を削除しますか?"
 #. file... opens): this copies it into grimoire/templates, to write on as paper (a row of
 #. about 800 px at 44 px).
 #: rust/src/browser.rs
-#, fuzzy
 msgid "Use as template"
-msgstr "テンプレート"
+msgstr "テンプレートとして使用"
 
 #. TRANSLATORS: a picture's card in Files (and in the picker the Photos sheet's From a
 #. file... opens): this copies it into grimoire/photos, to be a page's own picture (a row
 #. of about 800 px at 44 px).
 #: rust/src/browser.rs
-#, fuzzy
 msgid "Use as photo"
-msgstr "レイアウトを使用する"
+msgstr "写真として使用"
 
 #. TRANSLATORS: a PDF's card in the file picker: a notebook already holds this book, and this opens it
 #. (a row of about 800 px at 44 px).
@@ -1406,7 +1390,7 @@ msgstr "ノートとしてインポート"
 #. of about 800 px at 44 px).
 #: rust/src/browser.rs
 msgid "Restore"
-msgstr ""
+msgstr "復元"
 
 #: rust/src/browser.rs rust/src/library.rs rust/src/mapview.rs
 #: rust/src/pagesview.rs
@@ -1447,15 +1431,14 @@ msgstr "フォント"
 #. 2 KB, Oct 3"; 34 px).
 #: rust/src/browser.rs
 msgid "File"
-msgstr ""
+msgstr "ファイル"
 
 #. TRANSLATORS: a toast in Files: this font file (or a folder that holds it) is not deleted, because Settings
 #. has it as the font Grimoire is read in, or as that font's Bold file (pick another font in Settings > Font
 #. first). One line of about 1000 px at 44 px.
 #: rust/src/browser.rs
-#, fuzzy
 msgid "Font in use."
-msgstr "フォント: %s"
+msgstr "使用中のフォントです。"
 
 #. TRANSLATORS: a toast in Files: the file or folder went to the trash folder on the Kindle's storage (%s).
 #. TRANSLATORS: a deleted notebook went to the trash folder on the Kindle's storage (%s).
@@ -1467,9 +1450,9 @@ msgstr "%sに移動しました"
 #. TRANSLATORS: a toast in Files' Trash: the item is back; %s is where (a folder on the Kindle's storage, such
 #. as grimoire/photos, or the Library folder of a notebook). One line.
 #: rust/src/browser.rs
-#, fuzzy, c-format
+#, c-format
 msgid "Restored to %s."
-msgstr "%sとリンクしています。"
+msgstr "%sに復元しました。"
 
 #: rust/src/browser.rs rust/src/notebookpicker.rs
 msgid "Notebooks"
@@ -1502,7 +1485,7 @@ msgstr "%d/%dのページ"
 #. 220 px at 34 px in bold; a tap sorts by size, the largest first).
 #: rust/src/browser.rs
 msgid "Newest"
-msgstr ""
+msgstr "新しい順"
 
 #. TRANSLATORS: Live view's size control in the browser: Fit (the whole page in the window,
 #. the existing word), the page's width, percentages of the Kindle's own pixels, and smaller
@@ -1514,7 +1497,6 @@ msgstr "サイズ"
 #. TRANSLATORS: Files' Sort chip on its path bar while the rows go by name (one word of about 220 px at
 #. 34 px in bold; a tap puts the newest first).
 #: rust/src/browser.rs
-#, fuzzy
 msgid "Name"
 msgstr "名前"
 
@@ -1522,7 +1504,7 @@ msgstr "名前"
 #. of about 220 px at 34 px in bold; a tap shows them as a list).
 #: rust/src/browser.rs
 msgid "Covers"
-msgstr ""
+msgstr "表紙"
 
 #. TRANSLATORS: Files' View chip on its path bar while the files show as a list of rows (one word of about
 #. 220 px at 34 px in bold; a tap shows a grid of their previews). Also the Graph's List tab.
@@ -1534,13 +1516,13 @@ msgstr "リスト"
 #. 34 px in bold, about 360 px. A tap shows only the files Grimoire can use.
 #: rust/src/browser.rs
 msgid "All files"
-msgstr ""
+msgstr "すべてのファイル"
 
 #. TRANSLATORS: Files' Show chip on its path bar: only the files Grimoire can use are listed, at 34 px in
 #. bold, about 360 px. A tap lists every file.
 #: rust/src/browser.rs
 msgid "PDFs, pictures, fonts"
-msgstr ""
+msgstr "PDF、画像、フォント"
 
 #. TRANSLATORS: a PDF in the file picker that a notebook already holds (its notes are there); a tag at the
 #. right of the row under its name (about 260 px at 34 px).
@@ -1568,7 +1550,7 @@ msgstr "読み込み中..."
 #. (one line, about 700 px at 44 px).
 #: rust/src/browser.rs
 msgid "Making previews..."
-msgstr ""
+msgstr "プレビューを作成中..."
 
 #: rust/src/brush.rs
 msgctxt "tool"
@@ -1763,16 +1745,14 @@ msgstr "このページを固定する"
 #. TRANSLATORS: the row that opens the sleep settings' page: the sleep screen and the
 #. timer.
 #: rust/src/dispmenu.rs rust/src/settingsmenu.rs
-#, fuzzy
 msgid "Sleep settings"
-msgstr "設定を表示する"
+msgstr "スリープ設定"
 
 #. TRANSLATORS: the row that opens the clock settings' page: the clock and battery on a
 #. notebook page.
 #: rust/src/dispmenu.rs rust/src/settingsmenu.rs
-#, fuzzy
 msgid "Clock settings"
-msgstr "設定を表示する"
+msgstr "時計設定"
 
 #. TRANSLATORS: in the Display page where the sliders would be (1420 px at 44 px).
 #: rust/src/dispmenu.rs
@@ -2075,9 +2055,9 @@ msgstr "ページを追加できませんでした。"
 #. TRANSLATORS: a short toast (about 1700 px at 44 px in bold; up 1.2 s) after a key or a button stepped the pen
 #. in use to the next of its quick sizes; %s is the width as the sizes card writes it ("0.5 mm").
 #: rust/src/editor.rs
-#, fuzzy, c-format
+#, c-format
 msgid "Size: %s"
-msgstr "ビュー: %s"
+msgstr "サイズ: %s"
 
 #. TRANSLATORS: the title in New page's count pad (bold, 44 px, about 700 px): how many blank pages to
 #. add at once, typed on the number pad or changed by one with its - and + keys.
@@ -3532,26 +3512,24 @@ msgstr "アップデートをチェックする"
 
 #. TRANSLATORS: Settings > Updates, the row whose switch picks the branch updates come from.
 #: rust/src/library.rs
-#, fuzzy
 msgid "Update branch"
-msgstr "チャンネルを更新する"
+msgstr "アップデートチャンネル"
 
 #: rust/src/library.rs
 msgid "Enterprise"
-msgstr ""
+msgstr "エンタープライズ"
 
 #: rust/src/library.rs
 msgid "Enterprise 192-bit"
-msgstr ""
+msgstr "エンタープライズ 192-bit"
 
 #: rust/src/library.rs
 msgid "Unknown"
-msgstr ""
+msgstr "不明"
 
 #: rust/src/library.rs
-#, fuzzy
 msgid "Connected"
-msgstr "%sが接続されました"
+msgstr "接続済み"
 
 #: rust/src/library.rs
 msgid "Saved"
@@ -3577,16 +3555,14 @@ msgstr "Wi-Fiをチェック中…"
 
 #. TRANSLATORS: (Settings > Wi-Fi) the toast when a network profile could not be created.
 #: rust/src/library.rs
-#, fuzzy
 msgid "Could not add the network."
-msgstr "サーバーを起動できませんでした"
+msgstr "ネットワークを追加できませんでした。"
 
 #. TRANSLATORS: (Settings > Wi-Fi) the status when a saved network's profile could not be deleted.
 #. TRANSLATORS: (Settings > Wi-Fi) the toast when a saved network could not be forgotten.
 #: rust/src/library.rs
-#, fuzzy
 msgid "Could not forget the network."
-msgstr "サーバーを起動できませんでした"
+msgstr "ネットワークを削除できませんでした。"
 
 #: rust/src/library.rs rust/src/share.rs
 msgid "Could not read or change Wi-Fi."
@@ -3594,9 +3570,8 @@ msgstr "Wi-Fi の読み取りまたは変更ができませんでした。"
 
 #. TRANSLATORS: (Settings > Wi-Fi) the toast when the network cannot be disconnected now.
 #: rust/src/library.rs
-#, fuzzy
 msgid "Could not disconnect."
-msgstr "コントローラーが切断されました"
+msgstr "切断できませんでした。"
 
 #: rust/src/library.rs rust/src/share.rs
 msgid "Wi-Fi is off"
@@ -3646,46 +3621,43 @@ msgstr "Wi-Fi"
 #. TRANSLATORS: (Settings > Wi-Fi) the button above the nearby networks that scans again.
 #: rust/src/library.rs
 msgid "Rescan"
-msgstr ""
+msgstr "再スキャン"
 
 #. TRANSLATORS: (Settings > Wi-Fi) the button above the networks that adds a hidden network by name.
 #: rust/src/library.rs
 msgid "Other..."
-msgstr ""
+msgstr "その他..."
 
 #: rust/src/library.rs
-#, fuzzy
 msgid "Saved networks"
-msgstr "今すぐ保存"
+msgstr "保存されたネットワーク"
 
 #. TRANSLATORS: (Settings > Wi-Fi) the nearby list while the radio is off.
 #: rust/src/library.rs
-#, fuzzy
 msgid "Turn on Wi-Fi to see nearby networks."
-msgstr "まず Kindle の Wi-Fi をオンにします"
+msgstr "近くのネットワークを表示するには Wi-Fi をオンにしてください。"
 
 #. TRANSLATORS: (Settings > Wi-Fi) the nearby list while its scan runs.
 #: rust/src/library.rs
 msgid "Scanning for networks…"
-msgstr ""
+msgstr "ネットワークをスキャン中…"
 
 #. TRANSLATORS: (Settings > Wi-Fi) the nearby list when the last scan could not run or its answer
 #. was not one this reader knows.
 #. TRANSLATORS: (Settings > Wi-Fi) the toast when a scan cannot be asked for now.
 #: rust/src/library.rs
-#, fuzzy
 msgid "Could not scan for networks."
-msgstr "アップデートを確認できませんでした。"
+msgstr "ネットワークをスキャンできませんでした。"
 
 #. TRANSLATORS: (Settings > Wi-Fi) the nearby list when no network is near.
 #: rust/src/library.rs
 msgid "No networks found."
-msgstr ""
+msgstr "ネットワークが見つかりません。"
 
 #. TRANSLATORS: (Settings > Wi-Fi) the nearby list before its first scan has an answer.
 #: rust/src/library.rs
 msgid "Tap Rescan to look for networks."
-msgstr ""
+msgstr "「再スキャン」をタップしてネットワークを探してください。"
 
 #. TRANSLATORS: (Settings > Wi-Fi) a line in place of the saved networks when they could not be read.
 #: rust/src/library.rs
@@ -3700,80 +3672,78 @@ msgstr "保存されたネットワークを見るには Wi-Fi をオンにし�
 #. TRANSLATORS: (Settings > Wi-Fi) the Kindle has no saved Wi-Fi network; Grimoire adds none itself.
 #: rust/src/library.rs
 msgid "No saved networks. Add one with Other... or in Kindle settings."
-msgstr ""
+msgstr "保存されたネットワークがありません。「その他...」またはKindleの設定で追加してください。"
 
 #. TRANSLATORS: the password keyboard's title for a Wi-Fi network; %s is its name.
 #. TRANSLATORS: the password keyboard's title for a school/enterprise Wi-Fi network;
 #. %s is its name.
 #: rust/src/library.rs
-#, fuzzy, c-format
+#, c-format
 msgid "Password for %s"
-msgstr "%sのボタンを押してください"
+msgstr "%sのパスワード"
 
 #. TRANSLATORS: the keyboard's title for a school/enterprise Wi-Fi username; %s is its name.
 #: rust/src/library.rs
-#, fuzzy, c-format
+#, c-format
 msgid "Username for %s"
-msgstr "フォルダーの名前を変更する"
+msgstr "%sのユーザー名"
 
 #. TRANSLATORS: (Settings > Wi-Fi > Other...) the hidden network whose security is being picked; %s is its name.
 #: rust/src/library.rs
-#, fuzzy, c-format
+#, c-format
 msgid "Network: %s"
-msgstr "名前: %s"
+msgstr "ネットワーク: %s"
 
 #. TRANSLATORS: (Settings > Wi-Fi > Other...) the choice for a hidden network with no password.
 #: rust/src/library.rs
 msgid "Open network"
-msgstr ""
+msgstr "オープンネットワーク"
 
 #. TRANSLATORS: (Settings > Wi-Fi > Other...) the choice for a hidden WPA or WPA2 network.
 #: rust/src/library.rs
 msgid "WPA/WPA2 password"
-msgstr ""
+msgstr "WPA/WPA2 パスワード"
 
 #. TRANSLATORS: (Settings > Wi-Fi > Other...) the choice for a hidden WPA3-Personal network.
 #: rust/src/library.rs
 msgid "WPA3 password"
-msgstr ""
+msgstr "WPA3 パスワード"
 
 #. TRANSLATORS: (Settings > Wi-Fi > Other...) the choice for a hidden WPA2- or WPA3-Enterprise network.
 #: rust/src/library.rs
 msgid "WPA2/WPA3-Enterprise"
-msgstr ""
+msgstr "WPA2/WPA3-エンタープライズ"
 
 #. TRANSLATORS: the title of the page that adds a hidden Wi-Fi network by name.
 #: rust/src/library.rs
-#, fuzzy
 msgid "Other network"
-msgstr "他の色"
+msgstr "その他のネットワーク"
 
 #. TRANSLATORS: (Settings > Wi-Fi) the toast while the network connected to is dropped.
 #: rust/src/library.rs
-#, fuzzy
 msgid "Disconnecting…"
-msgstr "再接続中..."
+msgstr "切断中…"
 
 #. TRANSLATORS: the keyboard's title for a hidden Wi-Fi network's name.
 #: rust/src/library.rs
 msgid "Hidden network name"
-msgstr ""
+msgstr "隠しネットワーク名"
 
 #. TRANSLATORS: (Settings > Wi-Fi) the toast while a hidden network's profile is being created.
 #. TRANSLATORS: (Settings > Wi-Fi) the toast while an open network's profile is being created.
 #: rust/src/library.rs
 msgid "Adding network…"
-msgstr ""
+msgstr "ネットワークを追加中…"
 
 #. TRANSLATORS: (Settings > Wi-Fi) the toast while a saved network's profile is being deleted.
 #: rust/src/library.rs
 msgid "Forgetting network…"
-msgstr ""
+msgstr "ネットワークを削除中…"
 
 #. TRANSLATORS: (Settings > Wi-Fi) a scanned network Grimoire cannot add yet.
 #: rust/src/library.rs
 msgid "This network's security is not supported yet."
-msgstr ""
+msgstr "このネットワークのセキュリティはまだサポートされていません。"
 
 #. TRANSLATORS: Gestures row: action and first binding plus +N, about 1300 px with a thumbnail, two lines at 34 px.
 #: rust/src/library.rs
@@ -3866,9 +3836,9 @@ msgid "Language: %s"
 msgstr "言語: %s"
 
 #: rust/src/library.rs
-#, fuzzy, c-format
+#, c-format
 msgid "Pen button: %s"
-msgstr "ボタン: %s"
+msgstr "ペンボタン: %s"
 
 #: rust/src/library.rs
 #, c-format
@@ -4119,7 +4089,7 @@ msgstr "フォルダに移動"
 #. picker's "Show Files in Library" puts it back.
 #: rust/src/library.rs
 msgid "Hide from Library"
-msgstr ""
+msgstr "ライブラリから隠す"
 
 #: rust/src/library.rs
 msgid "Rename folder"
@@ -4192,77 +4162,74 @@ msgstr "Grimoireを終了しますか？"
 
 #. TRANSLATORS: the title of the list of what the pen's button does while writing (Settings > Pen).
 #: rust/src/library.rs
-#, fuzzy
 msgid "Pen button"
-msgstr "サイドボタン"
+msgstr "ペンボタン"
 
 #. TRANSLATORS: the title of the list of what the eraser does (Settings > Pen).
 #: rust/src/library.rs
-#, fuzzy
 msgid "Eraser"
 msgstr "消しゴム"
 
 #: rust/src/library.rs
 msgid "Kindle"
-msgstr ""
+msgstr "Kindle"
 
 #. TRANSLATORS: Settings > System > About, the device's name on a computer (the Kindle build names
 #. the Kindle's own model).
 #: rust/src/library.rs
 msgid "This computer"
-msgstr ""
+msgstr "このコンピューター"
 
 #: rust/src/library.rs
 msgid "Ko-fi"
-msgstr ""
+msgstr "Ko-fi"
 
 #: rust/src/library.rs
 msgid "Grimoire GitHub"
-msgstr ""
+msgstr "Grimoire GitHub"
 
 #: rust/src/library.rs
 msgid "Nebuff's GitHub"
-msgstr ""
+msgstr "Nebuff's GitHub"
 
 #: rust/src/library.rs
 msgid "Ganten's GitHub"
-msgstr ""
+msgstr "Ganten's GitHub"
 
 #: rust/src/library.rs
 msgid "About"
-msgstr ""
+msgstr "Grimoire について"
 
 #: rust/src/library.rs
-#, fuzzy, c-format
+#, c-format
 msgid "Grimoire %s"
-msgstr "Grimoire %sです。"
+msgstr "Grimoire %s"
 
 #: rust/src/library.rs
-#, fuzzy, c-format
+#, c-format
 msgid "Storage: %s of %s used"
-msgstr "%s/%dのページ"
+msgstr "ストレージ: %s / %s 使用中"
 
 #: rust/src/library.rs
 #, c-format
 msgid "%s free"
-msgstr ""
+msgstr "空き: %s"
 
 #. TRANSLATORS: Settings > System > About, where the storage bar would be when the system
 #. cannot tell the storage's size.
 #: rust/src/library.rs
-#, fuzzy
 msgid "Storage: not available"
-msgstr "ページが利用できません"
+msgstr "ストレージ: 利用できません"
 
 #. TRANSLATORS: Settings > System > About, the heading over its links (Ko-fi, GitHub, ...).
 #: rust/src/library.rs
 msgid "Links"
-msgstr ""
+msgstr "リンク"
 
 #. TRANSLATORS: Settings > System > About > a link, above the link's QR code.
 #: rust/src/library.rs
 msgid "Scan with a phone's camera"
-msgstr ""
+msgstr "スマートフォンのカメラでスキャン"
 
 #: rust/src/library.rs
 msgid "Couldn't create notebook (storage full?)"
@@ -4272,13 +4239,13 @@ msgstr "ノートブックを作成できませんでした (ストレージが�
 #. than a Wi-Fi name can be.
 #: rust/src/library.rs
 msgid "Use a network name of 1 to 32 characters."
-msgstr ""
+msgstr "ネットワーク名は1～32文字で入力してください。"
 
 #. TRANSLATORS: (Settings > Wi-Fi) the enterprise username is empty, a control
 #. character, or longer than 128 bytes.
 #: rust/src/library.rs
 msgid "Use a username of 1 to 128 characters."
-msgstr ""
+msgstr "ユーザー名は1～128文字で入力してください。"
 
 #: rust/src/library.rs
 msgid "Couldn't create folder. Use a shorter name without a slash."
@@ -5122,81 +5089,69 @@ msgstr ""
 #. TRANSLATORS: Settings' Pen category, the row that opens the pen button's choices, with the
 #. choice in use: "Pen button: Nothing".
 #: rust/src/settingsmenu.rs
-#, fuzzy
 msgid "Nothing"
-msgstr "スムージング"
+msgstr "なし"
 
 #: rust/src/settingsmenu.rs
-#, fuzzy
 msgid "Erases"
 msgstr "消しゴム"
 
 #: rust/src/settingsmenu.rs
-#, fuzzy
 msgid "Highlights"
-msgstr "ハイライト"
-
-#: rust/src/settingsmenu.rs
-msgid "Draws white"
-msgstr ""
-
-#. TRANSLATORS: the pen button submenu's four choices, what holding the pen's button while writing does.
-#: rust/src/settingsmenu.rs
-#, fuzzy
-msgid "Nothing while writing"
-msgstr "執筆"
-
-#: rust/src/settingsmenu.rs
-#, fuzzy
-msgid "Erases while writing"
-msgstr "押しながら消去"
-
-#: rust/src/settingsmenu.rs
-#, fuzzy
-msgid "Highlights while writing"
 msgstr "蛍光ペン"
 
 #: rust/src/settingsmenu.rs
+msgid "Draws white"
+msgstr "白インク"
+
+#. TRANSLATORS: the pen button submenu's four choices, what holding the pen's button while writing does.
+#: rust/src/settingsmenu.rs
+msgid "Nothing while writing"
+msgstr "ペンボタンを押しながら書いても何も起こらない"
+
+#: rust/src/settingsmenu.rs
+msgid "Erases while writing"
+msgstr "ペンボタンを押しながら書くと消しゴムになる"
+
+#: rust/src/settingsmenu.rs
+msgid "Highlights while writing"
+msgstr "ペンボタンを押しながら書くと蛍光ペンになる"
+
+#: rust/src/settingsmenu.rs
 msgid "Draws white while writing"
-msgstr ""
+msgstr "ペンボタンを押しながら書くと白インクで描く"
 
 #. TRANSLATORS: Settings' Pen category, the row that opens the eraser's choices, with the choice in
 #. use: "Eraser: Whole strokes".
 #: rust/src/settingsmenu.rs
-#, fuzzy
 msgid "Whole strokes"
 msgstr "ストローク全体"
 
 #: rust/src/settingsmenu.rs
-#, fuzzy
 msgid "Precise"
 msgstr "精密"
 
 #. TRANSLATORS: the eraser submenu's two choices: it takes every stroke it touches away whole, or
 #. only what it touches (as white ink does).
 #: rust/src/settingsmenu.rs
-#, fuzzy
 msgid "Takes away whole strokes"
-msgstr "ストローク全体"
+msgstr "ストローク全体を消す"
 
 #: rust/src/settingsmenu.rs
 msgid "Takes away only what it touches"
-msgstr ""
+msgstr "触れた部分だけを消す"
 
 #: rust/src/settingsmenu.rs
-#, fuzzy
 msgid "Style (Gothic)"
-msgstr "スタイル: クラシック (タップするとゴシック)"
+msgstr "スタイル (ゴシック)"
 
 #: rust/src/settingsmenu.rs
-#, fuzzy
 msgid "Style (Classic)"
-msgstr "選択（なぞり）"
+msgstr "スタイル (クラシック)"
 
 #: rust/src/settingsmenu.rs
-#, fuzzy
 msgid "Display: brightness, warmth"
-msgstr "表示: 明るさ、暖かさ、反転"
+msgstr "画面: 明るさ、色温度"
 
 #: rust/src/settingsmenu.rs
 msgid "General"
@@ -5204,38 +5159,33 @@ msgstr "一般"
 
 #. TRANSLATORS: the row that turns Grimoire's dark mode (white on black) on or off.
 #: rust/src/settingsmenu.rs
-#, fuzzy
 msgid "Dark mode"
-msgstr "消しゴムモード"
+msgstr "ダークモード"
 
 #: rust/src/settingsmenu.rs
-#, fuzzy
 msgid "Rotation (portrait and landscape)"
-msgstr "Kindleで回転（縦横）"
+msgstr "回転 (縦向きと横向き)"
 
 #: rust/src/settingsmenu.rs
 msgid "Pinch with two fingers to zoom"
 msgstr "2 本の指でピンチしてズームします"
 
 #: rust/src/settingsmenu.rs
-#, fuzzy
 msgid "Sleep & Clock"
-msgstr "もう寝てください"
+msgstr "スリープと時計"
 
 #. TRANSLATORS: the row that opens Tool Settings' sheet: pressure and tilt, per tool.
 #: rust/src/settingsmenu.rs
-#, fuzzy
 msgid "Tool Settings: pressure and tilt per tool"
-msgstr "ペンの感度 (ツールごとの圧力 + 傾き)"
+msgstr "ツール設定: ツールごとの筆圧と傾き"
 
 #: rust/src/settingsmenu.rs
 msgid "Calibrate pen and touch"
 msgstr "ペンとタッチを調整する"
 
 #: rust/src/settingsmenu.rs
-#, fuzzy
 msgid "Controls"
-msgstr "コントローラー"
+msgstr "コントロール"
 
 #: rust/src/settingsmenu.rs
 msgid "Shortcuts: keys and controller buttons"
@@ -5249,7 +5199,7 @@ msgstr "KOReader"
 #. storage used.
 #: rust/src/settingsmenu.rs
 msgid "About: device and storage"
-msgstr ""
+msgstr "Grimoire について: デバイスとストレージ"
 
 #: rust/src/share.rs
 #, c-format
